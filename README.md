@@ -32,5 +32,8 @@ runs about 20x faster than if you use the mainline version.
 The default NeTV2 firmware image already includes this source directory
 and binary pre-installed for you.
 
+Non-sequiter dev note: to start flterm, you want a command line like this:
 
-
+```
+./flterm --port /dev/ttyS0 --speed 115200 --kernel firmware.bin
+```
