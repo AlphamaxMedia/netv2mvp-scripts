@@ -13,8 +13,9 @@ cd $OCD_SCRIPT_DIR
 git pull origin master
 if [ $? -ne 0 ]
 then
-   printf "Can't pull update to JTAG scripts. Check network connectivity and confirm git repo at $OCD_SCRIPT_DIR with remote origin of https://github.com/AlphamaxMedia/netv2mvp-scripts.git\n"
-   exit 1
+    printf "Can't pull update to JTAG scripts. Check network connectivity and confirm git repo at $OCD_SCRIPT_DIR with remote origin of https://github.com/AlphamaxMedia/netv2mvp-scripts.git. Press return to exit.\n"
+    read dummy
+    exit 1
 fi
 
 printf "\n\nPulling updated firmware...\n"
@@ -22,8 +23,9 @@ cd $GIT_DIR
 git pull origin master
 if [ $? -ne 0 ]
 then
-   printf "Can't pull update to firmware. Check network connectivity and confirm git repo at $GIT_DIR with remote origin of https://github.com/AlphamaxMedia/netv2-fpga.git\n"
-   exit 1
+    printf "Can't pull update to firmware. Check network connectivity and confirm git repo at $GIT_DIR with remote origin of https://github.com/AlphamaxMedia/netv2-fpga.git. Press return to exit.\n"
+    read dummy
+    exit 1
 fi
 
 cd ~
@@ -43,7 +45,8 @@ then
     printf "Device type is 100T"
     DEVICE=100T
 else
-    printf "Device type is unknown or invalid, can't update."
+    printf "Device type is unknown or invalid, can't update. Press return to exit.\n"
+    read dummy
     exit 1
 fi
 
@@ -57,7 +60,8 @@ then
     FPGAIMAGE="user-100.bit"
     BSCANIMAGE="bscan_spi_xc7a100t.bit"
 else
-    printf "Device type not valid, aborting!"
+    printf "Device type not valid, aborting! Press return to exit.\n"
+    read dummy
     exit 1
 fi
 
@@ -76,8 +80,9 @@ dd if=/dev/zero of=/tmp/ufirmware.bin bs=1 count=1 seek=131071
 $GIT_DIR/bin/mknetv2img -f --output /tmp/ufirmware.upl /tmp/ufirmware.bin
 if [ $? -ne 0 ]
 then
-   printf "Could not pad firmware image, check permissions on /tmp\n"
-   exit 1
+    printf "Could not pad firmware image, check permissions on /tmp. Press return to exit.\n"
+    read dummy
+    exit 1
 fi
 
 printf "\n\nBurning FPGA soft-core firmware update to SPINOR...\n"
@@ -87,8 +92,9 @@ sudo openocd \
      -f $OCD_SCRIPT_DIR/cl-firmware.cfg
 if [ $? -ne 0 ]
 then
-   printf "Trouble with JTAG interface, aborting. Check for openocd and sudo priveledges.\n"
-   exit 1
+    printf "Trouble with JTAG interface, aborting. Check for openocd and sudo priveledges. Press return to exit.\n"
+    read dummy
+    exit 1
 fi
 
 
@@ -99,10 +105,12 @@ sudo openocd \
      -f $OCD_SCRIPT_DIR/cl-spifpga.cfg
 if [ $? -ne 0 ]
 then
-   printf "Trouble with JTAG interface, aborting. Check for openocd and sudo priveledges.\n"
+   printf "Trouble with JTAG interface, aborting. Check for openocd and sudo priveledges. Press return to exit.\n"
+   read dummy
    exit 1
 fi
 
-printf "\n\nFPGA update complete.\n"
+printf "\n\nFPGA update complete. Press return to exit.\n"
+read dummy
 
 exit 0
