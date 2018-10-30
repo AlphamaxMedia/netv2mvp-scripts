@@ -5,14 +5,14 @@ var http = require('http');
 
 port.write('json on\n\r', function(err) {
     if (err) {
-	return console.log('Error on write: ', err.message);
+	// return console.log('Error on write: ', err.message);
     }
-    console.log('message written');
+    // console.log('message written');
 });
 
 // Open errors will be emitted as an error event
 port.on('error', function(err) {
-    console.log('Error: ', err.message);
+    // console.log('Error: ', err.message);
 })
 
 var conString = '';
@@ -28,7 +28,7 @@ port.on('readable', function() {
 	    } catch(e) {
 		conString = '';
 	    }
-	    console.log(status);
+	    // console.log(status);
 	}
 	conString = '';
     }
