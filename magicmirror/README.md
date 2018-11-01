@@ -7,7 +7,7 @@ a webserver on port 6502. It's meant to be daemonized and run via pm2.
 netv2-term is an attempt at a magic mirror module. It never quite worked,
 but it's an interesting curio to look at later on.
 
-The status feed on the screen is instead done using "MMM-json-feed", with the
+The status feed on the screen is instead done using "MMM-json-feed" (https://github.com/AlphamaxMedia/MMM-json-feed), with the
 following entry in config/config.js:
 
    modules: [
