@@ -27,7 +27,7 @@ this fork:
 https://github.com/AlphamaxMedia/openocd.git
 
 Clone it recursively and build and install it. If you use this, openocd
-runs about 20x faster than if you use the mainline version.
+runs about 20x faster than if you use the mainline version. Be sure to use the --enable-bcm2835gpio configure option.
 
 The default NeTV2 firmware image already includes this source directory
 and binary pre-installed for you.
